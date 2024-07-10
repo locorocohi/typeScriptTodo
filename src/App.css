@@ -1,42 +1,221 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+    background: linear-gradient(130deg, #153677, #4e085f);
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.todo-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: bolder;
+    width: 100%;
+    padding: 0 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.todo-board {
+    margin: 50px 0;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 720px;
+    background: #fff;
+    border-radius: 20px;
+}
+
+label{
+    border: none;
+    outline: none;
+    background: #ff0d0d;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 40px;
+    font-weight: bolder;
+    width: 25%;
   }
-  to {
-    transform: rotate(360deg);
+
+  label:hover{
+    background: #ff604fe7;
+    cursor: pointer;
   }
+
+.todo-input-row {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #edeef0;
+    border-radius: 30px;
+    padding: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.editing {
+    color: rgb(210, 210, 210);
 }
 
-.card {
-  padding: 2em;
+@media (max-width: 450px) {
+    .todo-input-row {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+    .editing {
+        padding: 5px;
+        max-width: 170px;
+        width: 100%;
+    }
 }
 
-.read-the-docs {
-  color: #888;
+.todo-check-all {
+    transform: scale(1.5);
+}
+
+.todo-checked {
+    background-color: #ff2525;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+    color: #fff;
+}
+
+.todo-form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+@media (max-width: 450px) {
+    .todo-form {
+        margin: 0 10px;
+    }
+}
+
+.todo-btn {
+    border: none;
+    outline: none;
+    padding: 15px 30px;
+    background: #ff4625;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bolder;
+    border-radius: 30px;
+}
+
+.delete-all-btn {
+    background-color: #ff0d0d;
+}
+
+@media (max-width: 450px) {
+    .todo-btn {
+        padding: 5px 20px;
+    }
+    .todo-checked {
+        padding: 0;
+        margin: 10px;
+        width: 100%;
+    }
+}
+
+.todo-btn:hover {
+    background: #ff604fe7;
+}
+
+.active{
+    border: 5px solid #4a669e;
+}
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    border-radius: 10px;
+    padding-inline-start: 0;
+    padding: 5px;
+    margin: 5px;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5c7fc4;
+    font-weight: bolder;
+    color: #ffffff;
+    margin: 5px 0;
+    border-radius: 25px;
+}
+
+.todo-item .checkbox {
+    margin: 20px;
+    padding: 20px;
+    transform: scale(1.5);
+}
+
+.todo-text {
+    white-space: normal;
+    word-break: break-word;
+    padding: 0 10px;
+    width: 100%;
+}
+
+.todo-delete-btn {
+    color: red;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background-color: #ffffff;
+    padding: 15px 20px;
+    font-size: smaller;
+}
+
+.todo-delete-btn:hover {
+    background: #dcd1e4;
+    border-radius: 50%;
+}
+
+.completed {
+    text-decoration: line-through;
+}
+
+.todo-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media (max-width: 450px) {
+    .todo-footer {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.todo-filters {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 450px) {
+    .todo-filters {
+        justify-content: space-between;
+    }
 }
