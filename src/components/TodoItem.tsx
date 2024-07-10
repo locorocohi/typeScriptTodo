@@ -6,22 +6,32 @@ import { deleteTaskInStorage, toggleCompleteStatusInStorage, saveCurrentTextInSt
 
 import { ENTER_KEYCODE, ESC_KEYCODE } from "../utils/constants";
 
-export default function TodoItem ({task}) {
+type Task = {
+  id: number, 
+  text: string,
+  completed: boolean,
+}
+
+type Props = {
+  task: Task;
+}
+
+export default function TodoItem ({ task }: Props) {
   const [isEditing, setEditingStatus] = useState(false)
 
   const dispatch = useDispatch()
 
-  const saveCurrentText = (event) => {
-    const text = event.target.value
-    const id = task.id 
+  const saveCurrentText = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const text = event.currentTarget.value
+    const id: number = task.id 
 
     dispatch(saveNewText({text, id}))
     saveCurrentTextInStorage(text, id)
   }
 
-  const saveTextByEnter = (event) => {
+  const saveTextByEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if(event.keyCode === ENTER_KEYCODE) {
-      if(!event.target.value.trim()) {
+      if(!event.currentTarget.value.trim()) {
         saveCurrentText(event)
       }
       setEditingStatus(!isEditing)
@@ -35,19 +45,19 @@ export default function TodoItem ({task}) {
     setEditingStatus(!isEditing)
   }
 
-  const onChangeEventInput = (event) => {
-    if(event.target.value !== '') {
+  const onChangeEventInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(event.currentTarget.value !== '') {
       saveCurrentText(event)
     }
   }
 
-  const deleteCurrentTask = (id) => {
+  const deleteCurrentTask = (id: number) => {
     dispatch(deleteTask(id))
 
     deleteTaskInStorage(id)
   }
   
-  const toggleTaskStatus = (id) => {
+  const toggleTaskStatus = (id: number) => {
     dispatch(completeTask(id))
     
     toggleCompleteStatusInStorage(id)

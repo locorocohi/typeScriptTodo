@@ -1,12 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../store/hooks.ts";
 import { deleteCompleted } from "../store/TodoSlice";
 import FilterButton from "./TodoButton";
 import { deleteCompletedInStorage } from "../utils/storageTools";
+import type { Task } from "./TodoForm.tsx";
 
+type Props = {
+  activeKey: string,
+  changeFilterType: (type: string) => void,
+}
 
-export default function TodoFooter ({changeFilterType, activeKey}) {
-  const dispatch = useDispatch()
-  const todos = useSelector(store => store.todos.todos)
+export default function TodoFooter ({activeKey, changeFilterType}: Props) {
+  const dispatch = useAppDispatch()
+  const todos: Task[] = useAppSelector(store => store.todos.todos)
 
   const todosCount = {
     all: todos.length,
