@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 import { saveAllTodos, completeAll } from './store/TodoSlice';
 import { completeAllInStorage, parseStorageToArray } from './utils/storageTools';
+import type { Task } from './components/TodoForm';
 
 import './App.css';
 
@@ -12,9 +13,9 @@ import TodoFooter from './components/TodoFooter';
 import { AVAILABLE_KEYS } from './utils/constants';
 
 function App () {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [key, setKey] = useState(AVAILABLE_KEYS.ALL);
-  const todos = useSelector(store => store.todos.todos)
+  const todos = useAppSelector(store => store.todos.todos)
 
   useEffect(() => {
     const parsedTodos = parseStorageToArray('todos');
@@ -24,7 +25,7 @@ function App () {
     dispatch(saveAllTodos(parsedTodos))
   }, [])
 
-  const checkedAllStatus = todos.length ? todos.every(item => item.completed) : false
+  const checkedAllStatus = todos.length ? todos.every((item: Task) => item.completed) : false
 
   const filteredTasks = useMemo(() => {
     if (key === AVAILABLE_KEYS.ALL) {
@@ -38,7 +39,7 @@ function App () {
     })
   }, [key, todos]);
 
-  const changeFilterType = (type) => {
+  const changeFilterType = (type: string) => {
     setKey(type);
   }
 
