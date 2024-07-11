@@ -3,6 +3,7 @@ import { deleteCompleted } from "../store/TodoSlice";
 import FilterButton from "./TodoButton";
 import { deleteCompletedInStorage } from "../utils/storageTools";
 import type { Task } from "./TodoForm.tsx";
+import { AVAILABLE_KEYS } from "../utils/constants.ts";
 
 type Props = {
   activeKey: string,
@@ -29,22 +30,19 @@ export default function TodoFooter ({activeKey, changeFilterType}: Props) {
     <footer className="todo-footer">
       <div className="todo-filters">
         <FilterButton 
-          activeKey={'all'}
-          changeFilterType={changeFilterType}
+          changeFilterType={() => changeFilterType(AVAILABLE_KEYS.ALL)}
           title={`All (${todosCount.all})`}
-          isActive={activeKey === 'all' && todos.length > 0}
+          isActive={activeKey === AVAILABLE_KEYS.ALL && todos.length > 0}
         />
         <FilterButton
-          activeKey={'active'}
-          changeFilterType={changeFilterType}
+          changeFilterType={() => changeFilterType(AVAILABLE_KEYS.ACTIVE)}
           title={`Active (${todosCount.active})`}
-          isActive={activeKey === 'active'}
+          isActive={activeKey === AVAILABLE_KEYS.ACTIVE}
         />
         <FilterButton 
-          activeKey={'completed'}
-          changeFilterType={changeFilterType}
+          changeFilterType={() => changeFilterType(AVAILABLE_KEYS.COMPLETED)}
           title={`Completed (${todosCount.all-todosCount.active})`}
-          isActive={activeKey === 'completed'}
+          isActive={activeKey === AVAILABLE_KEYS.COMPLETED}
         />
       </div>
       <button className="todo-btn delete-all-btn" onClick={deleteCompletedAndChangeFilter}>Clear Completed</button>

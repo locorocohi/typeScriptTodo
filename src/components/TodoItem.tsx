@@ -16,12 +16,12 @@ type Props = {
   task: Task;
 }
 
-export default function TodoItem ({ task }: Props) {
+const TodoItem: React.FC<Props> = ({ task }) => {
   const [isEditing, setEditingStatus] = useState(false)
 
   const dispatch = useDispatch()
 
-  const saveCurrentText = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const saveCurrentText = (event: React.KeyboardEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>) => {
     const text = event.currentTarget.value
     const id: number = task.id 
 
@@ -90,3 +90,5 @@ export default function TodoItem ({ task }: Props) {
   </li>
   )
 }
+
+export default TodoItem;

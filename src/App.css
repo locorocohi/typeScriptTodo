@@ -31,13 +31,12 @@ body {
     padding: 50px;
     display: flex;
     flex-direction: column;
-    width: 100%;
     max-width: 720px;
     background: #fff;
     border-radius: 20px;
 }
 
-label{
+label {
     border: none;
     outline: none;
     background: #ff0d0d;
@@ -47,12 +46,12 @@ label{
     border-radius: 40px;
     font-weight: bolder;
     width: 25%;
-  }
+}
 
-  label:hover{
+label:hover {
     background: #ff604fe7;
     cursor: pointer;
-  }
+}
 
 .todo-input-row {
     margin-top: 20px;
@@ -137,7 +136,7 @@ label{
     background: #ff604fe7;
 }
 
-.active{
+.active {
     border: 5px solid #4a669e;
 }
 

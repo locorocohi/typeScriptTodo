@@ -4,20 +4,25 @@ export const addUpdatedTodosInStorage = (key: string, arrayToAdd: Task []) => {
     window.localStorage.setItem(key, JSON.stringify(arrayToAdd))
 }
 
-export const parseStorageToArray = (key: string): Task [] | void => {
+export const parseStorageToArray = (key: string): Task[]=> {
     const itemFromStorage: string | null = window.localStorage.getItem(key)
-    if (typeof itemFromStorage === 'string') {
-        return JSON.parse(itemFromStorage)
+
+    if (!itemFromStorage) {
+        return [];
     }
+
+    return JSON.parse(itemFromStorage)
 }
 
 export const completeAllInStorage = () => {
     const parsedTodos = parseStorageToArray('todos')
-    if (parsedTodos) {
-        const isSomeTasksCompleted = parsedTodos.some((item: Task) => !item.completed);
-        const updatedTodos: Task [] = parsedTodos.map((item: Task) => ({...item, completed: isSomeTasksCompleted }));
-        addUpdatedTodosInStorage('todos', updatedTodos)
+    if (!parsedTodos) {
+        return;
     }
+    const isSomeTasksCompleted = parsedTodos.some((item: Task) => !item.completed);
+    const updatedTodos: Task [] = parsedTodos.map((item: Task) => ({...item, completed: isSomeTasksCompleted }));
+    addUpdatedTodosInStorage('todos', updatedTodos)
+
 }
 
 export const deleteCompletedInStorage = () => {
@@ -35,8 +40,8 @@ export const addCurrentTaskInStorage = (task: Task) => {
 }
 
 export const deleteTaskInStorage = (id: number) => {
-    const parsedTodos: Task [] | void = parseStorageToArray('todos')
-    if(typeof parsedTodos !== 'undefined') {
+    const parsedTodos: Task[]  = parseStorageToArray('todos')
+    if(parsedTodos) {
         const updatedTodos = parsedTodos.filter((item: Task) => item.id !== id)
         addUpdatedTodosInStorage('todos', updatedTodos)
     }
