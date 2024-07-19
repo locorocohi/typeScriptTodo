@@ -22,7 +22,7 @@ export const completeAllInStorage = () => {
     const isSomeTasksCompleted = parsedTodos.some((item: Task) => !item.completed);
     const updatedTodos: Task [] = parsedTodos.map((item: Task) => ({...item, completed: isSomeTasksCompleted }));
     addUpdatedTodosInStorage('todos', updatedTodos)
-
+    
 }
 
 export const deleteCompletedInStorage = () => {

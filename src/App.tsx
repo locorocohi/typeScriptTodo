@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { saveAllTodos, completeAll } from './store/TodoSlice';
-import { completeAllInStorage, parseStorageToArray } from './utils/storageTools';
+import { completeAllInStorage } from './utils/storageTools';
 import type { Task } from './components/TodoForm';
+import { getTodos } from './api/todo';
 
 import './App.css';
 
@@ -18,11 +19,16 @@ function App () {
   const todos = useAppSelector(store => store.todos.todos)
 
   useEffect(() => {
-    const parsedTodos = parseStorageToArray('todos');
-    if(!parsedTodos?.length) {
-      return
+    async function fetchTodosFromDb () {
+      const parsedTodos = await getTodos()
+      
+      if(!parsedTodos?.length) {
+        return
+      }
+      dispatch(saveAllTodos(parsedTodos))
     }
-    dispatch(saveAllTodos(parsedTodos))
+
+    fetchTodosFromDb()
   }, [])
 
   const checkedAllStatus = todos.length ? todos.every((item: Task) => item.completed) : false
