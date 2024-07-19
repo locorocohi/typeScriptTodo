@@ -2,8 +2,8 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 
 import { deleteTask, completeTask, saveNewText } from "../store/TodoSlice";
-import { toggleCompleteStatusInStorage, saveCurrentTextInStorage } from "../utils/storageTools";
-import { deleteTaskFromDB } from "../api/todo";
+import { saveCurrentTextInStorage } from "../utils/storageTools";
+import { deleteTaskFromDB, completeTaskInDB } from "../api/todo";
 
 import { ENTER_KEYCODE, ESC_KEYCODE } from "../utils/constants";
 
@@ -61,7 +61,7 @@ const TodoItem: React.FC<Props> = ({ task }) => {
   const toggleTaskStatus = (id: number) => {
     dispatch(completeTask(id))
     
-    toggleCompleteStatusInStorage(id)
+    completeTaskInDB(id)
   }
 
   return (

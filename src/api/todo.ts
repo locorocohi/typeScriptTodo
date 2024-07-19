@@ -23,3 +23,13 @@ export const deleteTaskFromDB = async (id: number) => {
     body: JSON.stringify(id)
   })
 }
+
+export const completeTaskInDB = async (id: number) => {
+  await fetch(`http://${config.HOST}:${config.PORT}/api/todos/complete/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+  })
+}
+
