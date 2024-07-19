@@ -1,7 +1,8 @@
 import { Task } from "../components/TodoForm";
+import { config } from "../config";
 
 export const addTaskInDb = async (task: Task) => {
-  await fetch('http://localhost:5009/api/todos/create', {
+  await fetch(`http://${config.HOST}:${config.PORT}/api/todos/create`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -11,7 +12,14 @@ export const addTaskInDb = async (task: Task) => {
 }
 
 export const getTodos = async ()=> {
-  const response = await fetch('http://localhost:5009/api/todos/');
+  const response = await fetch(`http://${config.HOST}:${config.PORT}/api/todos/`);
 
   return response.json()
+}
+
+export const deleteTaskFromDB = async (id: number) => {
+  await fetch(`http://${config.HOST}:${config.PORT}/api/todos/${id}`, {
+    method: 'DELETE',
+    body: JSON.stringify(id)
+  })
 }
