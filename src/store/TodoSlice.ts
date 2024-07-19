@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { Task } from "../components/TodoForm";
+import { Task } from "../models/todo";
 
 type TodosState = {
     todos: Task [],

@@ -13,7 +13,6 @@ export default function ToDoForm () {
       return;
     }
 
-    console.log(text)
     const todo = await addTaskInDb({
       text,
     });
