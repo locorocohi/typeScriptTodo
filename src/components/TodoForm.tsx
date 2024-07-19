@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { addTask } from "../store/TodoSlice"
-import { addCurrentTaskInStorage } from "../utils/storageTools";
+import { addTaskInDb } from "../api/todo";
 
 export type Task = {
   id: number, 
@@ -25,7 +25,7 @@ export default function ToDoForm () {
     }
     dispatch(addTask(task))
     setText('');
-    addCurrentTaskInStorage(task)
+    addTaskInDb(task)
   }
 
   return (
