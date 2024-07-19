@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { saveAllTodos, completeAll } from './store/TodoSlice';
-// import { completeAllInStorage } from './utils/storageTools';
+import { completeAllTasksInDN } from './api/todo';
 import type { Task } from './components/TodoForm';
 import { getTodos } from './api/todo';
 
@@ -51,7 +51,7 @@ function App () {
 
   const completeAllTasks = () => {
     dispatch(completeAll())
-    // completeAllInStorage()
+    completeAllTasksInDN()
   }
 
   return (

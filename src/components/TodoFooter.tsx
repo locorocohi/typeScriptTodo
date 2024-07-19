@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../store/hooks.ts";
 import { deleteCompleted } from "../store/TodoSlice";
 import FilterButton from "./TodoButton";
-import { deleteCompletedInStorage } from "../utils/storageTools";
 import type { Task } from "./TodoForm.tsx";
 import { AVAILABLE_KEYS } from "../utils/constants.ts";
+import { removeCompletedTasks } from "../api/todo.ts";
 
 type Props = {
   activeKey: string,
@@ -23,7 +23,7 @@ export default function TodoFooter ({activeKey, changeFilterType}: Props) {
     dispatch(deleteCompleted())
     changeFilterType('all')
 
-    deleteCompletedInStorage()
+    removeCompletedTasks()
   }
 
   return (

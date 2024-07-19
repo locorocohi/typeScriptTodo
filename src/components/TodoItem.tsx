@@ -2,8 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux";
 
 import { deleteTask, completeTask, saveNewText } from "../store/TodoSlice";
-import { saveCurrentTextInStorage } from "../utils/storageTools";
-import { deleteTaskFromDB, completeTaskInDB } from "../api/todo";
+import { deleteTaskFromDB, completeTaskInDB, saveTaskText } from "../api/todo";
 
 import { ENTER_KEYCODE, ESC_KEYCODE } from "../utils/constants";
 
@@ -27,7 +26,7 @@ const TodoItem: React.FC<Props> = ({ task }) => {
     const id: number = task.id 
 
     dispatch(saveNewText({text, id}))
-    saveCurrentTextInStorage(text, id)
+    saveTaskText(text, id)
   }
 
   const saveTextByEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {

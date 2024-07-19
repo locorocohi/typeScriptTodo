@@ -19,8 +19,7 @@ export const getTodos = async ()=> {
 
 export const deleteTaskFromDB = async (id: number) => {
   await fetch(`http://${config.HOST}:${config.PORT}/api/todos/${id}`, {
-    method: 'DELETE',
-    body: JSON.stringify(id)
+    method: 'DELETE'
   })
 }
 
@@ -33,3 +32,26 @@ export const completeTaskInDB = async (id: number) => {
   })
 }
 
+export const completeAllTasksInDN = async () => {
+  await fetch(`http://${config.HOST}:${config.PORT}/api/todos/complete/all/tasks`,{
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+  })
+}
+
+export const removeCompletedTasks = async () => {
+  await fetch(`http://${config.HOST}:${config.PORT}/api/todos/remove/completed`, {method: 'DELETE'})
+}
+
+export const saveTaskText = async (text: string, id:number) => {
+  console.log(JSON.stringify(text))
+  await fetch(`http://${config.HOST}:${config.PORT}/api/todos/edit/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify({text})
+  })
+}
