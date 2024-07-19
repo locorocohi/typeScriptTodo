@@ -1,14 +1,16 @@
-import { Task } from "../components/TodoForm";
+import { Task } from "../models/todo";
 import { config } from "../config";
 
-export const addTaskInDb = async (task: Task) => {
-  await fetch(`http://${config.HOST}:${config.PORT}/api/todos/create`, {
+export const addTaskInDb = async (options: {text: string}): Promise<Task> => {
+  const res = await fetch(`http://${config.HOST}:${config.PORT}/api/todos/create`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     },
-    body: JSON.stringify(task)
+    body: JSON.stringify(options)
   })
+
+  return res.json();
 }
 
 export const getTodos = async ()=> {

@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../store/hooks.ts";
 import { deleteCompleted } from "../store/TodoSlice";
 import FilterButton from "./TodoButton";
-import type { Task } from "./TodoForm.tsx";
+import type { Task } from "../models/todo.ts";
 import { AVAILABLE_KEYS } from "../utils/constants.ts";
 import { removeCompletedTasks } from "../api/todo.ts";
 

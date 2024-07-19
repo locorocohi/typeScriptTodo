@@ -3,29 +3,23 @@ import { useDispatch } from "react-redux"
 import { addTask } from "../store/TodoSlice"
 import { addTaskInDb } from "../api/todo";
 
-export type Task = {
-  id: number, 
-  text: string,
-  completed: boolean,
-};
-
 export default function ToDoForm () {
   const [text, setText] = useState('')
   const dispatch = useDispatch()
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if(text === '') {
       return;
     }
-    const task: Task = {
-      id: Date.now(), 
-      text: text,
-      completed: false,
-    }
-    dispatch(addTask(task))
+
+    console.log(text)
+    const todo = await addTaskInDb({
+      text,
+    });
+
+    dispatch(addTask(todo))
     setText('');
-    addTaskInDb(task)
   }
 
   return (

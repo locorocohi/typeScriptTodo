@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './store/hooks';
 import { saveAllTodos, completeAll } from './store/TodoSlice';
 import { completeAllTasksInDN } from './api/todo';
-import type { Task } from './components/TodoForm';
+import type { Task } from './models/todo';
 import { getTodos } from './api/todo';
 
 import './App.css';
